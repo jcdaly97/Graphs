@@ -12,10 +12,10 @@ world = World()
 # You may uncomment the smaller graphs for development and testing purposes.
 #map_file = r"C:\Users\joelc\desktop\lambda-cs\graphs\projects\adventure\maps\test_line.txt"
 # map_file = "maps/test_cross.txt"
-map_file = r"C:\Users\joelc\desktop\lambda-cs\graphs\projects\adventure\maps\test_loop.txt"
-# map_file = "maps/test_loop_fork.txt"
+#map_file = r"C:\Users\joelc\desktop\lambda-cs\graphs\projects\adventure\maps\test_loop.txt"
+#map_file = r"C:\Users\joelc\desktop\lambda-cs\graphs\projects\adventure\maps\test_loop_fork.txt"
 #map_file = r"C:\Users\joelc\desktop\lambda-cs\graphs\projects\adventure\maps\test_cross.txt"
-
+map_file = r"C:\Users\joelc\desktop\lambda-cs\graphs\projects\adventure\maps\main_maze.txt"
 # Loads the map into a dictionary
 room_graph=literal_eval(open(map_file, "r").read())
 world.load_graph(room_graph)
@@ -73,8 +73,7 @@ opposite = {
 last_move = None
 previous_room = None 
 h = 0
-while h < len(room_graph)*2:
-    h += 1
+for i in range(0,len(room_graph)*2):
     if h > len(room_graph) * 2:
         break
     room = player.current_room
@@ -94,8 +93,9 @@ while h < len(room_graph)*2:
             traversal_graph[room.id][opposite[last_move]] = previous_room.id
     
     #fill in the connections between this room and the last if missing
-    print(traversal_graph[room.id][opposite[last_move]])
-    if traversal_graph[room.id][opposite[last_move]] == '?':
+
+    #print(traversal_graph[room.id][opposite[last_move]])
+    elif traversal_graph[room.id][opposite[last_move]] == '?':
         traversal_graph[previous_room.id][last_move] = room.id
         traversal_graph[room.id][opposite[last_move]] = previous_room.id
 
@@ -107,6 +107,7 @@ while h < len(room_graph)*2:
             previous_room = room
             last_move = k
             player.travel(k)
+            print("moving", k)
             traversal_path.append(k)
             break
 
