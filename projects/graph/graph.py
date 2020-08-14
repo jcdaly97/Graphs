@@ -88,9 +88,9 @@ class Graph:
         if starting_vertex in self.vertices and destination_vertex in self.vertices:
             q = Queue()
             visited = []
-            start_path = []
-            start_path.append(starting_vertex)
-            q.enqueue(start_path)
+            #start_path = []
+            #start_path.append(starting_vertex)
+            q.enqueue([starting_vertex])
             while q.size() > 0:
                 current_path = q.dequeue()
                 last_node = current_path[-1]
